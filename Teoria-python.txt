@@ -1,0 +1,69 @@
+
+Entorno de python
+$ python3
+
+Entorno de Django
+$ python3 manage.py shell
+
+Entorno de enviroment virtuales por las versiones 
+$ pip3
+
+Crear un entorno virtual
+-m: modules
+venv: virtual enviroment
+$ python3 -m venv FOLDER
+$ python3 -m venv .env
+
+Cuando creo la carpeta de entorno virtual ahi es donde me instalara todas las dependencias que vaya a usar
+en un proyecto especifico 
+
+al tener esa carpeta en especifico del entorno ahi es donde levantare en si el proyecto en este ejemplo
+.env me puedo fijar que en la terminal al inicio me saldra la carpeta del entorno
+
+$ source .env/bin/activate
+
+Salir 
+
+$ deactivate
+
+Instalar Django - Recuerda estar dentro del entorno
+-U: Ultima version
+$ pip install django -U
+
+Ver las librerias que tengo instala en el entorno
+$ pip freeze
+
+Con tener instalado el Django, podemos instalar este comando y ver todos los subcomandos que hay
+$ django-admin 
+
+Iniciar proyecto
+.: indicar que lo quiero en el directorio actual y no me cree otra carpeta
+$ django-admin startproject NAME_PROJECT .
+
+
+// ---------
+helper commands
+$ python3 manage.py
+
+Correr server
+$ python3 manage.py runserver
+
+// -----
+Crear Apps (modulo dentro del proyecto) en plural
+Estos modulo se instala en el el proyecto principal en settings.py INSTALLED_APPS
+$ python3 manage.py startapp NAME_APPS
+$ python3 manage.py startapp posts
+
+// ------
+Python trabaja con el patron de diseño MTV - Model Template Views
+
+Lanzar migrate
+$ python3 manage.py migrate
+
+Crear una nueva migracion, ej User, el va a detectar los cambios que hay dentro del archivo models
+$ python3 manage.py makemigrations
+
+
+
+*********************************+
+Create m
