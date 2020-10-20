@@ -58,7 +58,9 @@ ROOT_URLCONF = 'platzigram.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,5 +125,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Servir archivos staticos
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
+STATICFILES_FINDERS = [    
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
+# Servir Imagenes en el navegador
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'

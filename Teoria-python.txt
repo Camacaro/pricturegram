@@ -70,3 +70,8 @@ Create m
 
 
 **************************************************
+
+Templates personalizados, tenemos que incluirlos dentro de settings en Template dirs
+
+https://docs.djangoproject.com/en/3.1/ref/settings/#static-files
+STATIC FILES, se configuran en settings

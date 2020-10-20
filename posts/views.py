@@ -62,5 +62,7 @@ def list_posts(request):
   # y en la configuracion de settings lo tenemos seteado a true para que busque
   # dentro de los directorios templates
   # https://docs.djangoproject.com/en/3.1/topics/templates/
-  return render(request, 'feed.html', {'posts': posts})
+  # return render(request, 'feed.html', {'posts': posts})
+  # Ahora redirigere mis templates centralizados y que define en mi settings template dirs
+  return render(request, 'posts/feed.html', {'posts': posts})
 
