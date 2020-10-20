@@ -2,6 +2,7 @@
 # Librarias Django
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 # utiles
 from datetime import datetime
@@ -57,6 +58,9 @@ def list_posts_test(request):
 
   return HttpResponse( '<br>'.join(content)  )
 
+# este decorador lo que hace es verificar si estas logueado sino es asi te redireccionara 
+# a lo que este en settings.LOGIN_URL
+@login_required
 def list_posts(request):
   # el feed.html lo encontro ya que esta dentro de la carpeta templates
   # y en la configuracion de settings lo tenemos seteado a true para que busque
