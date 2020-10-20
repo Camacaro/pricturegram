@@ -18,6 +18,8 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 
 from platzigram import views as local_views
 from posts import views as posts_views
@@ -31,4 +33,7 @@ urlpatterns = [
 
     path('posts-test/', posts_views.list_posts_test),
     path('posts/', posts_views.list_posts),
-]
+
+    # servir archivos staticos, imagenes
+    # https://docs.djangoproject.com/en/3.1/ref/settings/
+] + static( settings.MEDIA_URL, document_root=settings.MEDIA_ROOT )
