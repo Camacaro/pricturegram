@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+  {% comment %} este user lo tomo de un middleware de authenticationMiddleware al autenticarme {% endcomment %}
+{% block  head_content %}
+  <title> @{{ request.user.username }} </title>
+{% endblock head_content %}
+
+{% block container %}
+  <h1 class="mt-5"> @{{ request.user.username }}  </h1>
+{% endblock container %}
