@@ -13,7 +13,9 @@
   <form action="{% url 'signup' %}" method='POST' >
     {% csrf_token %}
 
-    <div class="form-group">
+    {{ form.as_p }}
+
+    {% comment %} <div class="form-group">
       <input class="form-control" type="text" placeholder="username" name="username" required="true" />
     </div>
 
@@ -40,7 +42,7 @@
 
     <div class="form-group">
       <input class="form-control" type="email" placeholder="Eamil address" name="email" required="true" />
-    </div>
+    </div> {% endcomment %}
 
     <button type="submit" class="btn btn-primary btn-block mt-5"> Register</button>
   </form>

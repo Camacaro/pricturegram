@@ -13,7 +13,7 @@
   
 
   {% comment %} login es el nombre de la url que le pusimos en urls.py {% endcomment %}
-  <form method="POST" action="{% url 'login' %}">
+  <form method="POST" action="{% url 'users:login' %}">
 
     {% comment %} token input por session csrf_token, al hacer GET a esta pagina lo obtendre {% endcomment %}
     {% csrf_token %}
@@ -28,4 +28,6 @@
 
     <button type="submit" class="btn btn-primary btn-block mt-5"> Sign In </button>
   </form>
+
+  <p class="mt-4"> Don't have an account yet? <a href="{% url 'users:signup' %}"> Sign up here. </p>
 {% endblock container %}

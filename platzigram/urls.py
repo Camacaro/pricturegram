@@ -17,7 +17,7 @@ Including another URLconf
 # Modulo de URLs
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -33,14 +33,25 @@ urlpatterns = [
     path('sorted/', local_views.sort_integers, name='sorted'),
     path('hi/<str:name>/<int:age>/', local_views.say_hi, name='hi'),
 
-    path('posts-test/', posts_views.list_posts_test),
-    # el / es innecesario por eso se deja en vacio
-    path('', posts_views.list_posts, name='feed'),
 
-    path('users/login/', users_views.login_view, name='login'),
-    path('users/logout/', users_views.logout_view, name='logout'),
-    path('users/signup/', users_views.signup_view, name='signup'),
-    path('users/me/profile', users_views.update_profile, name='update_profile'),
+
+    path('posts-test/', posts_views.list_posts_test),
+    # Esto es para incluir las dos rutas de abajo en una en otro archivo
+    path('', include( ('posts.urls', 'posts'), namespace='posts') ),
+    # el / es innecesario por eso se deja en vacio
+    # path('', posts_views.list_posts, name='feed'),
+    # path('posts/new', posts_views.create_post, name='create_post'),
+
+    # argumentos
+    # 'users/' : init path
+    # 'users.urls' : file where are the urls
+    # 'users' : aplication -> la aplicacion
+    # namespace : namespace de las urls 
+    path('users/', include( ('users.urls', 'users'), namespace='users' ) ),
+    # path('users/login/', users_views.login_view, name='login'),
+    # path('users/logout/', users_views.logout_view, name='logout'),
+    # path('users/signup/', users_views.signup_view, name='signup'),
+    # path('users/me/profile', users_views.update_profile, name='update_profile'),
 
 
     # servir archivos staticos, imagenes
