@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth import authenticate, login
+from django.contrib.auth import views as auth_views
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import login_required
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView, UpdateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -41,6 +42,20 @@ def login_view(request):
 
   return render(request, 'users/login.html')
 
+# https://docs.djangoproject.com/en/3.1/topics/auth/default/#module-django.contrib.auth.views
+class LoginView( auth_views.LoginView ):
+  '''Login view'''
+
+  template_name = 'users/login.html'
+  
+  # al hacer success, esto redirecciona hacia http://localhost:8000/accounts/profile/
+  # para cambiar esto, se va hacia platzigram/settings y añadir
+  # LOGIN_REDIRECT_URL = '/ - settings.LOGIN_REDIRECT_URL
+
+
+
+
+
 def signup_view(request):
   
   if request.method == 'POST':
@@ -58,6 +73,20 @@ def signup_view(request):
       'form': form
     }
   )
+
+# https://ccbv.co.uk/projects/Django/3.0/django.views.generic.edit/FormView/
+# Reemplazar la funcion signup_view por una clase FormView
+class Signup(FormView):
+  '''Users sign up view'''
+  
+  template_name = 'users/signup.html'
+  form_class = SignupForm
+  success_url = reverse_lazy('users:login')
+
+  def form_valid(self, form):
+    '''Save for data.'''
+    form.save()
+    return super().form_valid(form)
 
 # Esta es sin aplicarle el Form
 # def signup_view(request):
@@ -124,10 +153,40 @@ def update_profile(request):
     }
   )
 
+# Actualizar formulario
+# https://ccbv.co.uk/projects/Django/3.0/django.views.generic.edit/UpdateView/
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
+  '''Update profile view.'''
+  model = Profile
+  template_name = "users/update_profile.html"
+  # campos a editar
+  fields = ['website', 'biography', 'phone_number', 'picture']
+
+  def get_object(self):
+    '''Return user's profile'''
+    return self.request.user.profile
+  
+  def get_success_url(self):
+    '''Return to user's profile'''
+    username = self.object.user.username
+    return reverse('users:detail', kwargs={'username': username} )
+
+
+
 @login_required
 def logout_view(request):
   logout(request)
   return redirect('users:login')
+
+
+
+class LogoutView(LoginRequiredMixin, auth_views.LogoutView):
+  '''Logout view'''
+  # ejemplo pero no hara nada, es el template del logout que no tiene
+  template_name = 'users/logged_out.html'
+
+  # setear la url al redirigir en settings.LOGOUT_REDIRECT_URL
+
 
 # https://ccbv.co.uk/projects/Django/3.0/django.views.generic.detail/DetailView/
 # https://docs.djangoproject.com/en/3.1/ref/class-based-views/generic-display/#detailview

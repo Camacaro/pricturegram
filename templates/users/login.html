@@ -7,8 +7,10 @@
 
 {% block container %}
 
-  {% if error %}
-    <p class="alert alert-danger">  {{ error }} </p>
+  {% comment %} como estoy usando formularion clase, el error ahora viene desde form
+  how i'm using Class form, the error comes from Form {% endcomment %}
+  {% if form.errors %}
+    <p class="alert alert-danger">  {{ form.errors }} </p>
   {% endif %}
   
 

@@ -12,25 +12,29 @@ urlpatterns = [
   # Management
   path(
     route= 'login/',
-    view= views.login_view, 
+    # view= views.login_view, 
+    view= views.LoginView.as_view(),
     name='login'
   ),
 
   path(
     route= 'logout/',
-    view= views.logout_view, 
+    # view= views.logout_view, 
+    view= views.LogoutView.as_view(),
     name='logout'
   ),
 
   path(
     route= 'signup/',
-    view= views.signup_view, 
+    # view= views.signup_view, 
+    view= views.Signup.as_view(),
     name='signup'
   ),
   path(
 
     route= 'me/profie', 
-    view= views.update_profile, 
+    # view= views.update_profile, 
+    view= views.UpdateProfileView.as_view(),
     name='update'
   ),
 
